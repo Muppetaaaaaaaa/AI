@@ -1,0 +1,766 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn more about AI technologies and their applications">
+    <meta name="theme-color" content="#0a192f">
+    <title>Learn More About AI - Detailed Insights</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reuse the same CSS variables and base styles from index.html */
+        :root {
+            --primary: #64ffda;
+            --secondary: #00b4d8;
+            --accent: #7f5af0;
+            --bg-dark: #0a192f;
+            --text-light: #fff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(-45deg, var(--bg-dark), #112240, #1a365d, #2d3748);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-light);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(100,255,218,0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(100,255,218,0.1);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .section:hover::before {
+            transform: scaleX(1);
+        }
+
+        h1, h2, h3 {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 40px;
+            animation: glow 2s ease-in-out infinite alternate;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        h1:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px var(--primary), 0 0 20px var(--secondary);
+            }
+            to {
+                text-shadow: 0 0 20px var(--primary), 0 0 30px var(--secondary);
+            }
+        }
+
+        h2 {
+            font-size: 2em;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        h2:hover {
+            transform: translateX(10px);
+        }
+
+        h3 {
+            font-size: 1.5em;
+            transition: all 0.3s ease;
+        }
+
+        h3:hover {
+            letter-spacing: 1px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: rgba(255,255,255,0.9);
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        p:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+
+        p::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        p:hover::before {
+            opacity: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            padding: 20px;
+            margin: 20px 0;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+            transform-origin: left;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+
+        .timeline-item.active {
+            background: rgba(100,255,218,0.1);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(100,255,218,0.2);
+        }
+
+        .timeline-item:hover {
+            transform: scale(1.02);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .timeline-item:hover::after {
+            transform: scaleX(1);
+        }
+
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+            perspective: 1000px;
+        }
+
+        .use-case-card {
+            padding: 20px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            backdrop-filter: blur(5px);
+        }
+
+        .use-case-card.expanded {
+            grid-column: 1 / -1;
+            background: rgba(100,255,218,0.1);
+            transform: rotateX(360deg);
+        }
+
+        .use-case-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(100,255,218,0.1));
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .use-case-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .use-case-card:hover {
+            transform: translateY(-5px) scale(1.02) rotateY(10deg);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            perspective: 1000px;
+        }
+
+        .resource-link {
+            display: block;
+            padding: 15px;
+            background: rgba(100,255,218,0.1);
+            border-radius: 8px;
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transform-style: preserve-3d;
+        }
+
+        .resource-link::after {
+            content: '→';
+            position: absolute;
+            right: 15px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .resource-link:hover {
+            background: rgba(100,255,218,0.2);
+            transform: translateX(5px) rotateY(10deg);
+            padding-right: 40px;
+        }
+
+        .resource-link:hover::after {
+            opacity: 1;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        ul li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform-origin: left;
+        }
+
+        ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        ul li:hover {
+            transform: translateX(10px) scale(1.05);
+            color: var(--primary);
+        }
+
+        ul li:hover::before {
+            transform: scale(1.2) rotate(90deg);
+        }
+
+        .hidden-content {
+            display: none;
+            padding: 10px;
+            margin-top: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 5px;
+            transform-origin: top;
+            animation: slideDown 0.3s ease forwards;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: scaleY(0);
+            }
+            to {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: var(--bg-dark);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+                nav {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100,255,218,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(100,255,218,0.1);
+            color: var(--primary);
+        }
+
+        nav a.active {
+            background: rgba(100,255,218,0.2);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="chat.html">Chat</a></li>
+        <li><a href="more.html" class="active">More</a></li>
+    </ul>
+</nav>
+
+    <div class="container">
+        <h1 id="title" onclick="changeTitle()">Understanding AI Technologies</h1>
+
+        <section class="section" onclick="toggleSection(this)">
+            <h2>Historical Development</h2>
+            <div class="timeline">
+                <div class="timeline-item" onclick="expandTimelineItem(event, this)">
+                    <h3>1950s - The Birth of AI</h3>
+                    <p>The term "Artificial Intelligence" was coined at the Dartmouth Conference, marking the field's official beginning.</p>
+                    <div class="hidden-content">
+                        <p>Key figures included John McCarthy, Marvin Minsky, and Claude Shannon. The conference lasted for eight weeks and set the foundation for AI research.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" onclick="expandTimelineItem(event, this)">
+                    <h3>1960s - Early Developments</h3>
+                    <p>Creation of early natural language processing programs and the first chatbots like ELIZA.</p>
+                    <div class="hidden-content">
+                        <p>ELIZA was created by Joseph Weizenbaum and could simulate a psychotherapist by using pattern matching and substitution techniques.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" onclick="expandTimelineItem(event, this)">
+                    <h3>1970s - Knowledge-Based Systems</h3>
+                    <p>Development of the first expert systems and knowledge representation frameworks.</p>
+                    <div class="hidden-content">
+                        <p>MYCIN was one of the first expert systems, designed to diagnose blood infections and recommend antibiotics.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" onclick="expandTimelineItem(event, this)">
+                    <h3>1980s - Expert Systems</h3>
+                    <p>Development of rule-based systems that could emulate decision-making of human experts.</p>
+                    <div class="hidden-content">
+                        <p>The field saw significant commercial applications, with companies investing heavily in AI research and development.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" onclick="expandTimelineItem(event, this)">
+                    <h3>1990s - Machine Learning Focus</h3>
+                    <p>Shift towards machine learning approaches and neural networks.</p>
+                    <div class="hidden-content">
+                        <p>The development of backpropagation algorithms and increased computing power led to renewed interest in neural networks.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" onclick="expandTimelineItem(event, this)">
+                    <h3>2000s - Big Data Era</h3>
+                    <p>Rise of big data and improved machine learning algorithms.</p>
+                    <div class="hidden-content">
+                        <p>The availability of large datasets and improved computing power enabled more sophisticated AI applications.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" onclick="expandTimelineItem(event, this)">
+                    <h3>2010s - Deep Learning Revolution</h3>
+                    <p>Breakthrough achievements in neural networks and deep learning, enabling significant advances in AI capabilities.</p>
+                    <div class="hidden-content">
+                        <p>Major breakthroughs in image recognition, natural language processing, and game-playing AI systems.</p>
+                    </div>
+                </div>
+                <div class="timeline-item" onclick="expandTimelineItem(event, this)">
+                    <h3>2020s - AI Transformation</h3>
+                    <p>Large language models, generative AI, and widespread adoption across industries.</p>
+                    <div class="hidden-content">
+                        <p>The emergence of GPT models, DALL-E, and other groundbreaking AI technologies transformed various sectors.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Current Applications</h2>
+            <div class="use-cases">
+                <div class="use-case-card" onclick="expandCard(this)">
+                    <h3>Healthcare</h3>
+                    <p>Disease diagnosis, drug discovery, and personalized treatment plans.</p>
+                    <div class="hidden-content">
+                        <p>AI is revolutionizing healthcare through improved diagnostic accuracy, accelerated drug development, and personalized medicine approaches.</p>
+                    </div>
+                </div>
+                <div class="use-case-card" onclick="expandCard(this)">
+                    <h3>Finance</h3>
+                    <p>Fraud detection, algorithmic trading, and risk assessment.</p>
+                    <div class="hidden-content">
+                        <p>AI-powered systems analyze market trends, detect fraudulent transactions, and optimize investment strategies in real-time.</p>
+                    </div>
+                </div>
+                <div class="use-case-card" onclick="expandCard(this)">
+                    <h3>Transportation</h3>
+                    <p>Autonomous vehicles, traffic management, and logistics optimization.</p>
+                    <div class="hidden-content">
+                        <p>Self-driving cars, smart traffic systems, and AI-optimized delivery routes are transforming transportation.</p>
+                    </div>
+                </div>
+                <div class="use-case-card" onclick="expandCard(this)">
+                    <h3>Education</h3>
+                    <p>Personalized learning paths, automated grading, and intelligent tutoring systems.</p>
+                    <div class="hidden-content">
+                        <p>AI adapts to individual learning styles and provides personalized feedback to enhance educational outcomes.</p>
+                    </div>
+                </div>
+                <div class="use-case-card" onclick="expandCard(this)">
+                    <h3>Manufacturing</h3>
+                    <p>Predictive maintenance, quality control, and process optimization.</p>
+                    <div class="hidden-content">
+                        <p>AI-powered systems predict equipment failures, optimize production processes, and ensure quality standards.</p>
+                    </div>
+                </div>
+                <div class="use-case-card" onclick="expandCard(this)">
+                    <h3>Entertainment</h3>
+                    <p>Content recommendation, game AI, and virtual reality experiences.</p>
+                    <div class="hidden-content">
+                        <p>AI enhances gaming experiences, personalizes content recommendations, and creates immersive virtual environments.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Future Implications</h2>
+            <p>AI is expected to transform society in fundamental ways:</p>
+            <ul id="implications-list">
+                <li onclick="showDetails(this)">Automation of routine tasks</li>
+                <li onclick="showDetails(this)">Creation of new job categories</li>
+                <li onclick="showDetails(this)">Enhanced human capabilities</li>
+                <li onclick="showDetails(this)">Solutions to global challenges</li>
+                <li onclick="showDetails(this)">Personalized healthcare solutions</li>
+                <li onclick="showDetails(this)">Smart cities and infrastructure</li>
+                <li onclick="showDetails(this)">Environmental protection and sustainability</li>
+                <li onclick="showDetails(this)">Space exploration and research</li>
+                <li onclick="showDetails(this)">Advanced cybersecurity systems</li>
+                <li onclick="showDetails(this)">Revolutionized education systems</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Learning Resources</h2>
+            <div class="resources">
+                <a href="#" class="resource-link" onclick="showResourceDetails(this, 'Comprehensive online courses from top universities and institutions')">Online Courses</a>
+                <a href="#" class="resource-link" onclick="showResourceDetails(this, 'Latest research papers and academic publications in AI')">Research Papers</a>
+                <a href="#" class="resource-link" onclick="showResourceDetails(this, 'Connect with AI enthusiasts and experts worldwide')">AI Communities</a>
+                <a href="#" class="resource-link" onclick="showResourceDetails(this, 'Essential tools and frameworks for AI development')">Development Tools</a>
+                <a href="#" class="resource-link" onclick="showResourceDetails(this, 'Step-by-step video tutorials on AI concepts')">Video Tutorials</a>
+                <a href="#" class="resource-link" onclick="showResourceDetails(this, 'Hands-on projects to build your AI portfolio')">Practice Projects</a>
+                <a href="#" class="resource-link" onclick="showResourceDetails(this, 'Must-read books for AI enthusiasts and practitioners')">Recommended Books</a>
+                <a href="#" class="resource-link" onclick="showResourceDetails(this, 'Professional certifications in AI and machine learning')">Certifications</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Ethical Considerations</h2>
+            <ul id="ethics-list">
+                <li onclick="expandEthicalTopic(this)">AI bias and fairness</li>
+                <li onclick="expandEthicalTopic(this)">Privacy concerns</li>
+                <li onclick="expandEthicalTopic(this)">Accountability and transparency</li>
+                <li onclick="expandEthicalTopic(this)">Impact on employment</li>
+                <li onclick="expandEthicalTopic(this)">Safety and security</li>
+                <li onclick="expandEthicalTopic(this)">Environmental impact</li>
+            </ul>
+        </section>
+    </div>
+
+    <div class="scroll-to-top" onclick="scrollToTop()">↑</div>
+
+    <script>
+        function changeTitle() {
+            const title = document.getElementById('title');
+            title.style.transform = 'scale(1.1)';
+            setTimeout(() => title.style.transform = 'scale(1)', 300);
+        }
+
+        function toggleSection(section) {
+            section.classList.toggle('active');
+            const allSections = document.querySelectorAll('.section');
+            allSections.forEach(s => {
+                if (s !== section) s.classList.remove('active');
+            });
+        }
+
+        function expandTimelineItem(event, item) {
+            event.stopPropagation();
+            const hiddenContent = item.querySelector('.hidden-content');
+            const allHiddenContent = document.querySelectorAll('.timeline-item .hidden-content');
+            
+            allHiddenContent.forEach(content => {
+                if (content !== hiddenContent) {
+                    content.style.display = 'none';
+                    content.parentElement.classList.remove('active');
+                }
+            });
+
+            hiddenContent.style.display = hiddenContent.style.display === 'block' ? 'none' : 'block';
+            item.classList.toggle('active');
+        }
+
+        function expandCard(card) {
+            const allCards = document.querySelectorAll('.use-case-card');
+            allCards.forEach(c => {
+                if (c !== card) {
+                    c.classList.remove('expanded');
+                    c.style.transform = '';
+                }
+            });
+            card.classList.toggle('expanded');
+            if (card.classList.contains('expanded')) {
+                card.style.transform = 'rotateX(360deg)';
+            } else {
+                card.style.transform = '';
+            }
+        }
+
+        function showDetails(item) {
+            item.style.color = 'var(--primary)';
+            item.style.transform = 'translateX(20px) scale(1.05)';
+            setTimeout(() => {
+                item.style.color = '';
+                item.style.transform = '';
+            }, 500);
+        }
+
+        function showResourceDetails(link, details) {
+            const existingTooltip = document.querySelector('.tooltip');
+            if (existingTooltip) existingTooltip.remove();
+
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.style.position = 'absolute';
+            tooltip.style.background = 'rgba(0,0,0,0.8)';
+            tooltip.style.padding = '10px';
+            tooltip.style.borderRadius = '5px';
+            tooltip.style.zIndex = '1000';
+            tooltip.style.transform = 'translateY(-100%)';
+            tooltip.style.animation = 'fadeIn 0.3s ease';
+            tooltip.textContent = details;
+
+            link.appendChild(tooltip);
+            setTimeout(() => {
+                tooltip.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => tooltip.remove(), 300);
+            }, 2000);
+        }
+
+        function expandEthicalTopic(item) {
+            const topics = {
+                'AI bias and fairness': 'Ensuring AI systems treat all users fairly and don\'t perpetuate existing biases.',
+                'Privacy concerns': 'Protecting user data and maintaining privacy in AI applications.',
+                'Accountability and transparency': 'Making AI decision-making processes transparent and accountable.',
+                'Impact on employment': 'Understanding and addressing AI\'s effect on the job market.',
+                'Safety and security': 'Ensuring AI systems are safe and secure from malicious use.',
+                'Environmental impact': 'Considering the environmental costs of training and running AI systems.'
+            };
+
+            const content = topics[item.textContent];
+            const existingDetail = item.querySelector('.topic-detail');
+            
+            if (existingDetail) {
+                existingDetail.style.animation = 'slideUp 0.3s ease forwards';
+                setTimeout(() => existingDetail.remove(), 300);
+            } else {
+                const detail = document.createElement('div');
+                detail.className = 'topic-detail';
+                detail.style.padding = '10px';
+                detail.style.marginTop = '5px';
+                detail.style.background = 'rgba(100,255,218,0.1)';
+                detail.style.borderRadius = '5px';
+                detail.style.animation = 'slideDown 0.3s ease forwards';
+                detail.textContent = content;
+                item.appendChild(detail);
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide scroll-to-top button with smooth fade
+        window.onscroll = function() {
+            const scrollButton = document.querySelector('.scroll-to-top');
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollButton.style.display = 'flex';
+                scrollButton.style.opacity = '1';
+            } else {
+                scrollButton.style.opacity = '0';
+                setTimeout(() => {
+                    if (scrollButton.style.opacity === '0') {
+                        scrollButton.style.display = 'none';
+                    }
+                }, 300);
+            }
+        };
+
+        // Add parallax effect to sections
+        document.addEventListener('mousemove', (e) => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                section.style.transform = `perspective(1000px) rotateX(${(y - rect.height/2)/50}deg) rotateY(${(x - rect.width/2)/50}deg)`;
+            });
+        });
+
+        // Reset transform when mouse leaves section
+        document.querySelectorAll('.section').forEach(section => {
+            section.addEventListener('mouseleave', () => {
+                section.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

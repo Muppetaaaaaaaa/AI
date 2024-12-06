@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chat with an AI assistant">
+    <meta name="theme-color" content="#0a192f">
+    <title>Chat with AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #64ffda;
+            --secondary: #00b4d8;
+            --accent: #7f5af0;
+            --bg-dark: #0a192f;
+            --text-light: #fff;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(-45deg, var(--bg-dark), #112240, #1a365d, #2d3748);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-light);
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100,255,218,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: rgba(100,255,218,0.1);
+            color: var(--primary);
+        }
+
+        nav a.active {
+            background: rgba(100,255,218,0.2);
+            color: var(--primary);
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100,255,218,0.2);
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid rgba(100,255,218,0.2);
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background: rgba(100,255,218,0.1);
+            margin-left: auto;
+            border: 1px solid rgba(100,255,218,0.2);
+            color: var(--primary);
+        }
+
+        .ai-message {
+            background: rgba(0,180,216,0.1);
+            margin-right: auto;
+            border: 1px solid rgba(0,180,216,0.2);
+            color: var(--secondary);
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        #user-input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid rgba(100,255,218,0.2);
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.05);
+            color: var(--text-light);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        #user-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(100,255,218,0.2);
+        }
+
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(100,255,218,0.3);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="chat.html" class="active">Chat</a></li>
+            <li><a href="more.html">More</a></li>
+        </ul>
+    </nav>
+
+    <div class="chat-container">
+        <h1>Chat with AI</h1>
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be added here dynamically -->
+        </div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type your message here...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Simple Q&A database with more flexible matching
+        const qaPairs = {
+            "hello": "Hi there! How can I help you today?",
+            "hi": "Hello! How can I assist you?",
+            "hey": "Hi! How can I help you today?",
+            "how are you": "I'm doing well, thank you for asking! How are you?",
+            "what is your name": "I'm a simple AI chatbot. You can call me ChatBot!",
+            "what time": "I can't tell the exact time, but you can check your device's clock!",
+            "who created you": "I'm a simple chatbot created for demonstration purposes.",
+            "what can you do": "I can answer simple questions and chat with you!",
+            "bye": "Goodbye! Have a great day!",
+            "thank": "You're welcome!",
+            "weather": "I'm sorry, I don't have access to real-time weather data. Please check a weather service!",
+            "joke": "Why don't scientists trust atoms? Because they make up everything! 😄",
+            "how old": "I'm just a computer program, so I don't have an age!",
+            "favorite color": "As an AI, I don't have favorites, but I find all colors fascinating!",
+            "music": "I don't actually listen to music, but I'd love to hear about your favorite songs!"
+        };
+
+        function getResponse(input) {
+            input = input.toLowerCase().trim();
+            
+            // Check for exact matches first
+            for (let question in qaPairs) {
+                if (input === question) {
+                    return qaPairs[question];
+                }
+            }
+            
+            // Then check for partial matches
+            for (let question in qaPairs) {
+                // Split input into words and check if any word matches
+                const inputWords = input.split(' ');
+                const questionWords = question.split(' ');
+                
+                for (let inputWord of inputWords) {
+                    for (let questionWord of questionWords) {
+                        if (inputWord.length > 2 && questionWord.includes(inputWord)) {
+                            return qaPairs[question];
+                        }
+                    }
+                }
+            }
+            
+            // If no match found, provide a more helpful default response
+            return "I'm still learning! Try asking me about the weather, telling jokes, or basic greetings.";
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const messagesContainer = document.getElementById('chat-messages');
+            
+            if (input.value.trim() === '') return;
+
+            // Add user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'message user-message';
+            userMessage.textContent = input.value;
+            messagesContainer.appendChild(userMessage);
+
+            // Get and display AI response immediately
+            const aiMessage = document.createElement('div');
+            aiMessage.className = 'message ai-message';
+            aiMessage.textContent = getResponse(input.value);
+            messagesContainer.appendChild(aiMessage);
+            
+            // Auto-scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Clear input
+            input.value = '';
+        }
+
+        // Allow sending message with Enter key
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Add initial greeting
+        window.onload = function() {
+            const messagesContainer = document.getElementById('chat-messages');
+            const aiMessage = document.createElement('div');
+            aiMessage.className = 'message ai-message';
+            aiMessage.textContent = "Hi! I'm ChatBot. How can I help you today?";
+            messagesContainer.appendChild(aiMessage);
+        }
+    </script>
+</body>
+</html>
